@@ -14,3 +14,9 @@ sequelize db:create
 NODE_ENV=test sequelize db:create
 ```
 
+
+## Generating a model
+
+```
+$ sequelize model:generate --name Book --attributes title:string
+```

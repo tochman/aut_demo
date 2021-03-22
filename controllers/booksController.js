@@ -1,6 +1,8 @@
+const { Book } = require('../models')
 const booksController = {
-  index(request, response) {
-    response.send({ books: [] })
+  async index(request, response) {
+    const books = await Book.findAll()
+    response.send({ books: books })
   }
 }
 
