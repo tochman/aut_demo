@@ -46,6 +46,7 @@ describe('GET /api/books', () => {
   });
 
   it.only('is expected to include author info', () => {
+    
     expect(response.body.books[0])
       .to.have.own.property('author')
       .that.has.property('firstName', 'Lucas')

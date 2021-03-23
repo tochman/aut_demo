@@ -19,5 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Book',
   });
+
+  Book.addScope('basicInfo', {
+    include: 'author',
+    attributes: ['id', 'title']
+  })
   return Book;
 };
