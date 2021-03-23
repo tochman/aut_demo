@@ -17,9 +17,10 @@ after(done => {
 
 describe('GET /api/books', () => {
   beforeEach(async () => {
+    let lucas = await factory.create('Author')
     await factory.createMany('Book', 2, [
-      { title: "Learn NodeJS" },
-      { title: "Learn Sequelize" }
+      { title: "Learn NodeJS", authorId: lucas.id },
+      { title: "Learn Sequelize", authorId: lucas.id }
     ])
     response = await request.get('/api/books')
   });
@@ -42,5 +43,11 @@ describe('GET /api/books', () => {
 
   it('is expected to include "Learn NodeJS"', () => {
     expect(response.body.books[0].title).to.equal("Learn NodeJS")
+  });
+
+  it.only('is expected to include author info', () => {
+    expect(response.body.books[0])
+      .to.have.own.property('author')
+      .that.has.property('firstName', 'Lucas')
   });
 });
